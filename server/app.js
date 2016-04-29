@@ -7,6 +7,25 @@ import pollController from './controllers/pollController'
 import voteController from './controllers/voteController'
 import bodyParser from 'body-parser'
 
+import webpack from 'webpack'
+import webpackMiddleware from 'webpack-dev-middleware'
+import webpackHotMiddleware from 'webpack-hot-middleware'
+import config from './../webpack.config.js'
+
+const compiler = webpack(config)
+const middleware = webpackMiddleware(compiler, {
+  publicPath: config.output.publicPath,
+  contentBase: 'src',
+  stats: {
+    colors: true,
+    hash: false,
+    timings: true,
+    chunks: false,
+    chunkModules: false,
+    modules: false
+  }
+})
+
 async function connect () {
   db.discover = path.join(__dirname, 'models')
   db.matcher = function shouldImportModel (modelFileName) {
@@ -30,8 +49,13 @@ async function connect () {
   app.post('/api/vote', voteController.handlePost)
 
   app.use(errorHandler)
+  app.use(middleware)
+  app.use(webpackHotMiddleware(compiler))
+  app.get('*', function response (req, res) {
+    res.write(middleware.fileSystem.readFileSync(path.join(__dirname, '/../dist/index.html')))
+    res.end()
+  })
 
   const port = 3000
   app.listen(port, () => console.log(`Running on port ${port}`))
 })()
-

@@ -4,7 +4,6 @@ const voteController = { }
 
 voteController.handlePost = async function (req, res, next) {
   try {
-    throw 'foo bar'
     const foundVote = await db.models.vote.findOne({
       where: {
         voterIp: req.ip,
@@ -21,7 +20,7 @@ voteController.handlePost = async function (req, res, next) {
         }
       }
     })
-    if(foundVote === null) {
+    if (foundVote === null) {
       await db.models.vote.create({
         voterIp: req.ip,
         pollOptionId: req.body.pollOptionId
