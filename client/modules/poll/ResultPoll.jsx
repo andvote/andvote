@@ -14,8 +14,16 @@ class ResultPoll extends React.Component {
   }
 
   componentWillMount () {
+    this.serverRequest = this._fetchPoll.bind(this)()
+  }
+
+  componentDidMount() {
+    this._timer = setInterval(() => this._fetchPoll.bind(this)(), 4000)
+  }
+
+  _fetchPoll () {
     const { pollId } = this.props.params
-    this.serverRequest = $.get(`/api/poll/${pollId}`, (result) => {
+    return $.get(`/api/poll/${pollId}`, (result) => {
       const { question, pollOptions } = result
       this.setState({
         question,
@@ -23,16 +31,14 @@ class ResultPoll extends React.Component {
         loading: false
       })
     }).fail(() => {
-      this.setState({
-        error: true
-      })
+      this.setState({error: true})
     })
   }
 
   componentWillUnmount () {
     this.serverRequest.abort()
+    clearInterval(this._timer)
   }
-
   render () {
     const { question, pollOptions, loading, error } = this.state
     const { pollId } = this.props.params

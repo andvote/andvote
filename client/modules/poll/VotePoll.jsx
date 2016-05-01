@@ -14,9 +14,16 @@ class VotePoll extends React.Component {
     }
   }
   componentWillMount () {
+    this.serverRequest = this._fetchPoll.bind(this)()
+  }
+
+  componentWillUnmount () {
+    this.serverRequest.abort()
+  }
+
+  _fetchPoll () {
     const { pollId } = this.props.params
-    console.log(pollId)
-    this.serverRequest = $.get(`/api/poll/${pollId}`, (result) => {
+    return $.get(`/api/poll/${pollId}`, (result) => {
       const { question, pollOptions } = result
       this.setState({
         question,
@@ -90,7 +97,7 @@ class VotePoll extends React.Component {
       contentType: 'application/json'
     }).always((result) => {
       if (result.status === 400) {
-        alert(result.responsetext)
+        return alert(JSON.parse(result.responseText).message)
       } else {
         if (!localStorage.voted) {
           localStorage.voted = ''

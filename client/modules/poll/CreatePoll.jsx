@@ -118,7 +118,7 @@ class CreatePoll extends React.Component {
   }
 
   validatePoll (pollData) {
-    if (pollData.question < 8) {
+    if (pollData.question.length <= 8) {
       return 'Question must be longer than 8 characters.'
     }
     if (pollData.options.length < 2) {
