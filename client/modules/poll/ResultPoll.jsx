@@ -46,8 +46,9 @@ class ResultPoll extends React.Component {
       <div className="container">
         <div className='row'>
           <div className='panel panel-default col-sm-offset-3 col-sm-6'> 
-            <h2 className='text-center'>Poll Result</h2>  
+            <h2 className='text-center'>Poll Results</h2>  
             <div className='panel-body text-center'>
+              {error ? <h4 className='text-center' style={{color: 'red'}}>Cannot find poll.</h4> : null}
               <h3>{question}</h3>
               {!loading ? pollOptions.map((option, i) => {
                 const { optionId, text, voteCount } = option
@@ -58,7 +59,7 @@ class ResultPoll extends React.Component {
                   </div>
                 )
               }): null}
-              <Link to={`/v/${pollId}`}>Vote on this poll</Link>
+              {!error ? <Link to={`/v/${pollId}`}>Vote on this poll</Link> : null }
             </div>
           </div>
         </div>

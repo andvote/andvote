@@ -42,9 +42,11 @@ class VotePoll extends React.Component {
       <div className='container'>
         <div className='row'>
           <div className='panel panel-default col-sm-offset-3 col-sm-6' style={{marginBottom: 4}}>
+            <h2 className='text-center'>&amp;VOTE!</h2>  
             <div className='panel-body'>
+                <h4 style={{fontSize: 18}} className='text-center'>QUESTION: </h4>
                 <h2 className='text-center' style={{marginTop: 0}}>{question}</h2>
-                {error ? <h4 style={{color: 'red'}}>Cannot find poll</h4> : null}
+                {error ? <h4 className='text-center' style={{color: 'red'}}>Cannot find poll</h4> : null}
                 <form onSubmit={this.createVote.bind(this)}>
                   {!loading ? pollOptions.map((pollOption, i) => {
                     const { optionId, text } = pollOption
@@ -64,7 +66,7 @@ class VotePoll extends React.Component {
                   }) : null}
                   <div className='row'>
                     <div className='col-sm-4 col-sm-offset-4'>
-                      <button className='btn btn-block btn-primary center-block' type='submit'>Create</button>
+                      {!error ? <button className='btn btn-block btn-primary center-block' type='submit'>Create</button> : null}
                     </div>
                   </div>
                 </form>
@@ -99,12 +101,11 @@ class VotePoll extends React.Component {
       if (result.status === 400) {
         return alert(JSON.parse(result.responseText).message)
       } else {
-        if (!localStorage.voted) {
-          localStorage.voted = ''
+        if (screen.width <= 800) {
+          window.location = `/r/${pollId}`;
+        } else {
+          browserHistory.push(`/r/${pollId}`)
         }
-        localStorage.voted += `${pollId},`
-
-        browserHistory.push(`/r/${pollId}`)
       }
     })
   }
