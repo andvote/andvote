@@ -11,6 +11,13 @@ pollController.handlePost = function (req, res, next) {
       return
     }
 
+    if (req.body.options.length > 6) {
+      res.status(400).json({
+        message: 'You can\'t specify more than 6 poll options, dude'
+      })
+      return
+    }
+
     const createdPoll = await db.models.poll.create({
       question: req.body.question
     }, {
