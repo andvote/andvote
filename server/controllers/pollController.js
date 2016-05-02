@@ -11,9 +11,9 @@ pollController.handlePost = function (req, res, next) {
       return
     }
 
-    if (req.body.options.length > 6) {
+    if (req.body.options.length > 16) {
       res.status(400).json({
-        message: 'You can\'t specify more than 6 poll options, dude'
+        message: 'You can\'t specify more than 16 poll options, dude'
       })
       return
     }

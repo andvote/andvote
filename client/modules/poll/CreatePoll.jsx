@@ -124,8 +124,8 @@ class CreatePoll extends React.Component {
     if (pollData.options.length < 2) {
       return 'Must enter atleast 2 options.'
     }
-    if (pollData.options.length > 6) {
-      return 'Cannot enter more than 6 options'
+    if (pollData.options.length > 16) {
+      return 'Cannot enter more than 16 options'
     }
   }
 }
