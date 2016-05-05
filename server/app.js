@@ -6,6 +6,7 @@ import path from 'path'
 import pollController from './controllers/pollController'
 import voteController from './controllers/voteController'
 import bodyParser from 'body-parser'
+import compression from 'compression'
 
 import webpack from 'webpack'
 import webpackMiddleware from 'webpack-dev-middleware'
@@ -60,6 +61,7 @@ async function connect () {
       res.end()
     })
   } else {
+    app.use(compression())
     app.use(express.static(path.join(__dirname, '../dist')))
     app.get('*', function response (req, res) {
       res.sendFile(path.join(__dirname, '../dist/index.html'))
