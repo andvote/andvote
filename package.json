@@ -1,7 +1,8 @@
 {
   "scripts": {
     "start": "node ./bin/www",
-    "dev": "nodemon -w ./ -x npm run start"
+    "dev": "nodemon -w ./ -x npm run start",
+    "production": "webpack --config ./webpack.production.config.js && NODE_ENV=production npm run start"
   },
   "devDependencies": {
     "babel-eslint": "^6.0.4",

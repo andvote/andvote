@@ -49,13 +49,22 @@ async function connect () {
   app.post('/api/vote', voteController.handlePost)
 
   app.use(errorHandler)
-  app.use(middleware)
-  app.use(webpackHotMiddleware(compiler))
-  app.get('*', function response (req, res) {
-    res.write(middleware.fileSystem.readFileSync(path.join(__dirname, '/../dist/index.html')))
-    res.end()
-  })
 
+  const isDeveloping = process.env.NODE_ENV !== 'production'
+  console.log(isDeveloping)
+  if (isDeveloping) {
+    app.use(middleware)
+    app.use(webpackHotMiddleware(compiler))
+    app.get('*', function response (req, res) {
+      res.write(middleware.fileSystem.readFileSync(path.join(__dirname, '../dist/index.html')))
+      res.end()
+    })
+  } else {
+    app.use(express.static(path.join(__dirname, '../dist')))
+    app.get('*', function response (req, res) {
+      res.sendFile(path.join(__dirname, '../dist/index.html'))
+    })
+  }
   const port = 3000
   app.listen(port, () => console.log(`Running on port ${port}`))
 })()
