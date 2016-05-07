@@ -1,0 +1,11 @@
+<div class="panel panel-default col-sm-offset-3 col-sm-6">
+  <h2 class="text-center">Poll Results</h2>
+  <div *ngIf="poll && poll.question && pollId" class="panel-body text-center">
+    <h2>{{ poll.question  }}</h2>
+    <div class="well well-sm" *ngFor="let option of poll.pollOptions">
+      <h4>Option: {{ option.text  }}</h4>
+      <h4>Votes: {{ option.voteCount }}</h4>
+    </div>
+    <a (click)="gotoPoll(pollId)">Vote on this poll</a>
+  </div>
+</div>

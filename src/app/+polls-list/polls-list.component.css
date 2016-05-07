@@ -1,0 +1,13 @@
+.question {
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-transition: all 300ms ease-in;
+    -moz-transition: all 300ms ease-in;
+    transition: all 300ms ease-in;
+}
+.question:hover {
+    background-color: #eee;
+}
+.footer {
+    padding: 10px;
+}

@@ -1,0 +1,21 @@
+<div class="panel panel-default col-sm-6 col-sm-offset-3">
+  <div class="panel-body">
+    <h2 class="text-center">Create Poll</h2>
+    <form>
+      <div class="form-group">
+        <label>Question:</label>
+        <input [(ngModel)]="poll.question" placeholder="Enter a question..." class="form-control">
+        <br />
+      </div>
+      <div class="form-group" >
+        <label>Options separate by line-breaks</label>
+        <textarea [(ngModel)]="pollOptionString" class="form-control" placeholder="{{ 'Enter\noptions\nlike this'}}" rows="5"></textarea>
+      </div>
+      <div class="row">
+        <div class="col-sm-4 col-sm-offset-4">
+          <button class="btn btn-block btn-primary center-block" (click)="createPoll()" >Create</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,34 @@
+<div class="container nav-container">
+  <nav class="navbar navbar-inverse">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+          aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+        <a class="navbar-brand" [routerLink]="['/']">
+          <img alt="&Vote" src="../icon.png" width="50" height="50" />
+        </a>
+        <a [routerLink]="['/']" class="navbar-brand">
+          <strong>&amp;Vote</strong>
+        </a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li>
+          <a [routerLink]="['/create-poll']">Create Poll</a>
+        </li>
+        <li>
+          <a [routerLink]="['/polls']">View Polls</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>
+<div class="container">
+  <div class="row">
+    <router-outlet></router-outlet>
+  </div>
+</div>

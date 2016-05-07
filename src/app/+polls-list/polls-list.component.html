@@ -1,0 +1,18 @@
+<div class="panel panel-default col-sm-6 text-center col-sm-offset-3">
+  <h1>Polls</h1>
+  <div class="panel-body text-left">
+    <ul *ngIf="polls" class="list-group">
+      <li *ngFor="let poll of polls" (click)="gotoPoll(poll.id)" class="list-group-item question">
+        <strong>{{ poll.question }}</strong>
+      </li>
+    </ul>
+  </div>
+  <div class="row footer">
+    <div class="col-sm-6">
+      <button *ngIf="prev" class="btn btn-block btn-primary" (click)="prevPolls()">Newer Polls</button>
+    </div>
+    <div class="col-sm-6">
+      <button *ngIf="next" class="btn btn-block btn-primary" (click)="nextPolls()">Older Polls</button>
+    </div>
+  </div>
+</div>
