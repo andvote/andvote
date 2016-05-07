@@ -1,0 +1,21 @@
+<div *ngIf="message && message.length > 0" class=" panel col-sm-6 col-sm-offset-3">
+  <div class="alert alert-danger" role="alert">
+    <strong>{{ message }}</strong>
+  </div>
+</div>
+<div *ngIf="poll && poll.question" class="panel panel-default col-sm-6 col-sm-offset-3">
+  <div class="panel-body text-center">
+    <h1> Poll </h1>
+    <h2> {{poll && poll.question ? poll.question : ''}} </h2>
+    <form (submit)="onSubmit($event)">
+      <p *ngFor="let option of (poll && poll.pollOptions) ? poll.pollOptions : null">
+        <label class="option-label">
+          <input type="radio" (click)= "onOptionSelected($event)" name="poll-option" value="{{ option.optionId }}"> 
+          {{ option && option.text ? option.text : ''}}
+         </label>
+      </p>
+      <button class="btn btn-success" type="submit">Cast Vote</button>
+    </form>
+    <button class="btn btn-primary btn-sm" (click)="goBack()">Go Back</button>
+  </div>
+</div>
