@@ -1,8 +1,20 @@
 # andvote-angular
 
-:ballot_box_with_check: NG&amp;Vote clone of [Andvote](andvote.com "andvote.com") ,  but with Angular2 as front-end ( I like React too!)
+:ballot_box_with_check: NG&amp;Vote clone of [andvote](andvote.com "andvote.com") ,  but with Angular2 as front-end ( I like React too!)
 
 Made this by inspring live coding sessions by [alexbooker](https://github.com/alexbooker/ "Alex Booker") and [DmsChrisPena](https://github.com/DmsChrisPena/ "Chris Pena")
+
+Use [angular-cli](https://github.com/angular/angular-cli) for quick generation of components, routes, services, models, etc.
+`````
+npm install -g angular-cli
+cd andvote-angular
+npm install
+npm start
+`````
+`npm start` will fireup our API server as well run the `ng serve` command of angular-cli.
+other commands of angular-cli can be found [here](https://cli.angular.io)
+
+> Make sure you have **MySQL** running and the `PATH` also contains the path for MySQL executable
 
 Though UI is little bit different in adding poll form
 
