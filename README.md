@@ -11,15 +11,16 @@ cd andvote-angular
 npm install
 npm start
 `````
-`npm start` will fireup our API server as well run the `ng serve` command of angular-cli.
+`npm start` will fireup our API server as well as run 
+the `ng serve` command of angular-cli.
 other commands of angular-cli can be found [here](https://cli.angular.io)
 
 > Make sure you have **MySQL** running and the `PATH` also contains the path for MySQL executable
 
-Though UI is little bit different in adding poll form
 
 ### Todo
-1. Change how the URL i shown. Currently its like `localhost:4200/poll-info;id=1` 
+1. Change how the URL is shown. Currently its like `localhost:4200/poll-info;id=1`
+  1. Should be like `localhost:4200/poll-info/1`
 2. Make UI smililar to original from where options added on the fly by focusing
 
 ### API documentation
