@@ -1,5 +1,6 @@
-# andvote
-:ballot_box_with_check: NG&amp;Vote clone of [Andvote](andvote.com) ,  but with Angular2 as weapon
+# andvote-angular
+
+:ballot_box_with_check: NG&amp;Vote clone of [Andvote](andvote.com "andvote.com") ,  but with Angular2 as front-end ( I like React too!)
 
 Made this by inspring live coding sessions by [alexbooker](https://github.com/alexbooker/ "Alex Booker") and [DmsChrisPena](https://github.com/DmsChrisPena/ "Chris Pena")
 
@@ -167,3 +168,6 @@ Status 500
   "message": "An internal server error occured"
 }
 ```
+
+#### Todo
+Fix the `pollController#getRandomPoll` method to get random poll to vote on it.
