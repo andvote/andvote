@@ -66,7 +66,7 @@ class VotePoll extends React.Component {
                   }) : null}
                   <div className='row'>
                     <div className='col-sm-4 col-sm-offset-4'>
-                      {!error ? <button className='btn btn-block btn-primary center-block' type='submit'>Create</button> : null}
+                      {!error ? <button className='btn btn-block btn-primary center-block' type='submit'>Vote</button> : null}
                     </div>
                   </div>
                 </form>
