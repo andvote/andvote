@@ -17,7 +17,7 @@ class ResultPoll extends React.Component {
     this.serverRequest = this._fetchPoll.bind(this)()
   }
 
-  componentDidMount() {
+  componentDidMount () {
     this._timer = setInterval(() => this._fetchPoll.bind(this)(), 4000)
   }
 
@@ -43,22 +43,22 @@ class ResultPoll extends React.Component {
     const { question, pollOptions, loading, error } = this.state
     const { pollId } = this.props.params
     return (
-      <div className="container">
+      <div className='container'>
         <div className='row'>
-          <div className='panel panel-default col-sm-offset-3 col-sm-6'> 
-            <h2 className='text-center'>Poll Results</h2>  
+          <div className='panel panel-default col-sm-offset-3 col-sm-6'>
+            <h2 className='text-center'>Poll Results</h2>
             <div className='panel-body text-center'>
               {error ? <h4 className='text-center' style={{color: 'red'}}>Cannot find poll.</h4> : null}
               <h3>{question}</h3>
               {!loading ? pollOptions.map((option, i) => {
-                const { optionId, text, voteCount } = option
+                const { text, voteCount } = option
                 return (
-                  <div key={i} className="well well-sm">
+                  <div key={i} className='well well-sm'>
                     <h4>Option: {text}</h4>
                     <h4>Votes: {voteCount}</h4>
                   </div>
                 )
-              }): null}
+              }) : null}
               {!error ? <Link to={`/v/${pollId}`}>Vote on this poll</Link> : null }
             </div>
           </div>
