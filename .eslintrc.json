@@ -5,13 +5,13 @@
     "node": true
   },
   "parserOptions": {
-   "ecmaFeatures": {
-     "jsx": true
-   }
+    "ecmaFeatures": {
+      "jsx": true
+    }
   },
   "plugins": [
-        "react"
-    ],
+    "react"
+  ],
   "extends": ["standard", "plugin:react/recommended"],
   "parser": "babel-eslint"
 }
