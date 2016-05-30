@@ -42,7 +42,7 @@ class VotePoll extends React.Component {
       <div className='container'>
         <div className='row'>
           <div className='panel panel-default col-sm-offset-3 col-sm-6' style={{marginBottom: 4}}>
-            <h2 className='text-center'>&amp;VOTE!</h2>  
+            <h2 className='text-center'>&amp;VOTE!</h2>
             <div className='panel-body'>
                 <h4 style={{fontSize: 18}} className='text-center'>QUESTION: </h4>
                 <h2 className='text-center' style={{marginTop: 0}}>{question}</h2>
@@ -53,13 +53,13 @@ class VotePoll extends React.Component {
                     return (
                       <div key={i} className='radio text-center' style={{margin: 12}}>
                         <label style={{fontSize: 24}}>
-                          <input 
-                          type='radio' 
-                          onClick={this.checkedOption.bind(this, optionId)} 
-                          name='option' 
-                          value={optionId} 
+                          <input
+                          type='radio'
+                          onClick={this.checkedOption.bind(this, optionId)}
+                          name='option'
+                          value={optionId}
                           style={{marginTop: 10}}
-                          /> {text} 
+                          /> {text}
                         </label>
                       </div>
                     )
@@ -72,7 +72,7 @@ class VotePoll extends React.Component {
                 </form>
             </div>
           </div>
-        </div> 
+        </div>
         <Link className='text-center center-block' to={`/r/${pollId}`}>Poll Results</Link>
       </div>
     )
@@ -102,7 +102,7 @@ class VotePoll extends React.Component {
         return alert(JSON.parse(result.responseText).message)
       } else {
         if (screen.width <= 800) {
-          window.location = `/r/${pollId}`;
+          window.location = `/r/${pollId}`
         } else {
           browserHistory.push(`/r/${pollId}`)
         }
