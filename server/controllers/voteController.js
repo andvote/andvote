@@ -1,4 +1,5 @@
 import db from 'sequelize-connect'
+import Pusher from 'pusher'
 
 const voteController = { }
 
@@ -25,6 +26,33 @@ voteController.handlePost = async function (req, res, next) {
         voterIp: req.ip,
         pollOptionId: req.body.pollOptionId
       })
+      var pusher = new Pusher({
+        appId: process.env.PUSHER_APP_ID,
+        key: process.env.PUSHER_APP_KEY,
+        secret: process.env.PUSHER_APP_SECRET
+      })
+      const foundPoll = await db.models.poll.findOne({
+        where: {
+          id: req.body.pollId
+        },
+        group: ['pollOptions.id'],
+        attributes: ['question'],
+        include: {
+          model: db.models.pollOption,
+          attributes: [
+            ['id', 'optionId'],
+            'text',
+            [db.sequelize.fn('COUNT', db.sequelize.col('pollOptions.votes.id')), 'voteCount']
+          ],
+          include: {
+            model: db.models.vote,
+            attributes: []
+          }
+        }
+      })
+      pusher.trigger(req.body.pollId, 'pollOptionsUpdated', {
+        'updatedPollOptions': foundPoll.dataValues.pollOptions
+      })
       res.sendStatus(201)
     } else {
       res.status(400).json({
@@ -32,6 +60,7 @@ voteController.handlePost = async function (req, res, next) {
       })
     }
   } catch (err) {
+    console.log(err)
     next(err)
   }
 }

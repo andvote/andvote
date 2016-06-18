@@ -33,7 +33,8 @@ async function connect () {
     return true
   }
   await db.connect('andvote_schema', 'root', '', {
-    force: false
+    force: false,
+    logging: false
   })
 }
 

@@ -84,7 +84,8 @@ class VotePoll extends React.Component {
     const { pollId } = this.props.params
     const { optionIdChecked } = this.state
     const data = {
-      pollOptionId: optionIdChecked
+      pollOptionId: optionIdChecked,
+      pollId
     }
 
     if (!optionIdChecked) {

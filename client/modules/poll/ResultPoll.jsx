@@ -1,6 +1,7 @@
 import React from 'react'
 import $ from 'jquery'
 import { Link } from 'react-router'
+import Pusher from 'pusher-js'
 
 class ResultPoll extends React.Component {
   constructor (props) {
@@ -15,10 +16,13 @@ class ResultPoll extends React.Component {
 
   componentWillMount () {
     this.serverRequest = this._fetchPoll.bind(this)()
-  }
-
-  componentDidMount () {
-    this._timer = setInterval(() => this._fetchPoll.bind(this)(), 4000)
+    this.pusher = new Pusher('c5a1ce2844ebf5089362')
+    this.channel = this.pusher.subscribe(this.props.params.pollId)
+    this.channel.bind('pollOptionsUpdated', (data) => {
+      this.setState({
+        pollOptions: data.updatedPollOptions
+      })
+    })
   }
 
   _fetchPoll () {
@@ -37,8 +41,9 @@ class ResultPoll extends React.Component {
 
   componentWillUnmount () {
     this.serverRequest.abort()
-    clearInterval(this._timer)
+    this.channel.unsubscribe()
   }
+
   render () {
     const { question, pollOptions, loading, error } = this.state
     const { pollId } = this.props.params

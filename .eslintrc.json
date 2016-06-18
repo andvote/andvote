@@ -10,7 +10,8 @@
     }
   },
   "rules": {
-    "react/prop-types": "off"
+    "react/prop-types": "off",
+    "generator-star-spacing": "off"
   },
   "extends": ["standard", "standard-react"],
   "parser": "babel-eslint"
