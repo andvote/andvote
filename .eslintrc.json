@@ -9,9 +9,9 @@
       "jsx": true
     }
   },
-  "plugins": [
-    "react"
-  ],
-  "extends": ["standard"],
+  "rules": {
+    "react/prop-types": "off"
+  },
+  "extends": ["standard", "standard-react"],
   "parser": "babel-eslint"
 }
