@@ -18,7 +18,7 @@ const ResultPoll = React.createClass({
 
   componentWillMount () {
     this.serverRequest = this._fetchPoll()
-    this.pusher = new Pusher('b15f0d252f16256cab88')
+    this.pusher = new Pusher(process.env.PUSHER_API_KEY || 'HARDCODED_API_KEY')
     this.channel = this.pusher.subscribe(this.props.params.pollId)
     this.channel.bind('pollOptionsUpdated', (data) => {
       this.setState({

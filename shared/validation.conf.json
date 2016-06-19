@@ -1,0 +1,5 @@
+{
+	"question_min_length":	8,
+	"poll_min_entries":		2,
+	"poll_max_entries":		16
+}

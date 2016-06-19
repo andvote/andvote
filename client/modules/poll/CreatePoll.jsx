@@ -2,8 +2,8 @@ import React from 'react'
 import $ from 'jquery'
 import { browserHistory } from 'react-router'
 import Chartjs from 'react-chartjs'
+let validation = require('json!../../../shared/validation.conf.json');
 
-console.log(Chartjs)
 const CreatePoll = React.createClass({
   getInitialState () {
     return {
@@ -122,13 +122,13 @@ const CreatePoll = React.createClass({
 
   validatePoll (pollData) {
     if (pollData.question.length <= 8) {
-      return 'Question must be longer than 8 characters.'
+      return `Question must be longer than ${validation.question_min_length} characters.`
     }
     if (pollData.options.length < 2) {
-      return 'Must enter atleast 2 options.'
+      return `Must enter at least ${validation.poll_min_entries} options.`
     }
     if (pollData.options.length > 16) {
-      return 'Cannot enter more than 16 options'
+      return `Cannot enter more than ${validation.poll_max_entries} options`
     }
   }
 })

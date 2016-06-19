@@ -1,19 +1,27 @@
 import db from 'sequelize-connect'
+let validation require('json!../../shared/validation.conf.json')
 
 const pollController = { }
 
 pollController.handlePost = function (req, res, next) {
   db.sequelize.transaction(async transaction => {
-    if (req.body.options.length < 2) {
+	if (req.body.question.length <= validation.question_min_length ) {
+		res.status(400).json({
+			message: `Your Question must be longer than ${validation.question_min_length} characters`
+		})
+		return
+	}
+
+    if (req.body.options.length < validation.poll_min_entries) {
       res.status(400).json({
-        message: 'You need to specify at least two poll options'
+        message: `You need to specify at least ${validation.poll_min_entries} poll options`
       })
       return
     }
 
-    if (req.body.options.length > 16) {
+    if (req.body.options.length > validation.poll_max_entries) {
       res.status(400).json({
-        message: 'You can\'t specify more than 16 poll options, dude'
+        message: `You can\'t specify more than ${validation.poll_max_entries} poll options, dude`
       })
       return
     }
