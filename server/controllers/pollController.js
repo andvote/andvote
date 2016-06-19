@@ -45,6 +45,7 @@ pollController.handleGet = async function (req, res, next) {
         id: req.params.pollId
       },
       group: ['pollOptions.id'],
+      order: [[db.sequelize.literal('`pollOptions.voteCount`'), 'ASC']],
       attributes: ['question'],
       include: {
         model: db.models.pollOption,

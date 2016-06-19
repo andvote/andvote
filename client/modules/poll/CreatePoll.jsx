@@ -1,15 +1,18 @@
 import React from 'react'
 import $ from 'jquery'
 import { browserHistory } from 'react-router'
-class CreatePoll extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
+import Chartjs from 'react-chartjs'
+
+console.log(Chartjs)
+const CreatePoll = React.createClass({
+  getInitialState () {
+    return {
       optionsCount: 2
     }
-  }
+  },
+
   render () {
-    const options = this.createOptions.bind(this)()
+    const options = this.createOptions()
 
     return (
       <div className='container'>
@@ -17,7 +20,7 @@ class CreatePoll extends React.Component {
           <div className='panel panel-default col-sm-6 col-sm-offset-3'>
             <div className='panel-body'>
               <h2 className='text-center'>Create Poll</h2>
-              <form onSubmit={this.createPoll.bind(this)}>
+              <form onSubmit={this.createPoll}>
                 <div className='form-group'>
                   <label>Question:</label>
                   <input placeholder='Enter a question...' className='form-control' ref='question' /> <br />
@@ -34,7 +37,7 @@ class CreatePoll extends React.Component {
         </div>
       </div>
     )
-  }
+  },
 
   createOptions () {
     const { optionsCount } = this.state
@@ -46,10 +49,10 @@ class CreatePoll extends React.Component {
       let removeOption
 
       if (i === optionsCount - 1) {
-        addOption = this.addOption.bind(this)
+        addOption = this.addOption
       }
       if (i === optionsCount - 2) {
-        removeOption = this.removeOption.bind(this)
+        removeOption = this.removeOption
       }
 
       const optionElement = (
@@ -67,12 +70,12 @@ class CreatePoll extends React.Component {
       options.push(optionElement)
     }
     return options
-  }
+  },
 
   addOption () {
     const { optionsCount } = this.state
     this.setState({optionsCount: optionsCount + 1})
-  }
+  },
 
   removeOption () {
     const { optionsCount } = this.state
@@ -80,7 +83,7 @@ class CreatePoll extends React.Component {
     if (!lastOption.value && optionsCount > 2) {
       this.setState({optionsCount: optionsCount - 1})
     }
-  }
+  },
 
   createPoll (event) {
     event.preventDefault()
@@ -115,7 +118,7 @@ class CreatePoll extends React.Component {
     }).fail((er) => {
       console.log(er)
     })
-  }
+  },
 
   validatePoll (pollData) {
     if (pollData.question.length <= 8) {
@@ -128,6 +131,6 @@ class CreatePoll extends React.Component {
       return 'Cannot enter more than 16 options'
     }
   }
-}
+})
 
 module.exports = CreatePoll
