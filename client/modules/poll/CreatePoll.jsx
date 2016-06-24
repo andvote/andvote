@@ -122,13 +122,13 @@ const CreatePoll = React.createClass({
 
   validatePoll (pollData) {
     if (pollData.question.length <= 8) {
-      return 'Question must be longer than 8 characters.'
+      return 'Your Question must be longer than 8 characters.'
     }
     if (pollData.options.length < 2) {
-      return 'Must enter atleast 2 options.'
+      return 'In order to create this Poll you must enter at least 2 options.'
     }
     if (pollData.options.length > 16) {
-      return 'Cannot enter more than 16 options'
+      return 'You cannot enter more than 16 options.'
     }
   }
 })
