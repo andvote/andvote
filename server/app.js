@@ -32,7 +32,7 @@ async function connect () {
   db.matcher = function shouldImportModel (modelFileName) {
     return true
   }
-  await db.connect('andvote_schema', 'root', '', {
+  await db.connect(process.env.DB, process.env.DB_USER, process.env.DB_PASS, {
     force: false,
     logging: console.log
   })

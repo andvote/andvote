@@ -3,7 +3,6 @@ import $ from 'jquery'
 import { browserHistory } from 'react-router'
 import Chartjs from 'react-chartjs'
 
-console.log(Chartjs)
 const CreatePoll = React.createClass({
   getInitialState () {
     return {
