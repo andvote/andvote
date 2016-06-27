@@ -1,7 +1,7 @@
 import React from 'react'
-import $ from 'jquery'
 import { browserHistory } from 'react-router'
 import Chartjs from 'react-chartjs'
+import axios from 'axios'
 
 console.log(Chartjs)
 const CreatePoll = React.createClass({
@@ -107,17 +107,10 @@ const CreatePoll = React.createClass({
       return alert(checkValidPoll)
     }
 
-    $.ajax({
-      method: 'POST',
-      url: '/api/poll',
-      data: JSON.stringify(data),
-      dataType: 'json',
-      contentType: 'application/json'
-    }).done((result) => {
-      browserHistory.push(`/v/${result.createdPollId}`)
-    }).fail((er) => {
-      console.log(er)
-    })
+	axios
+		.post('/api/poll', data)
+		.then(({data: res}) => browserHistory.push(`/v/${res.createdPollId}`))
+		.catch(err => console.log(err))
   },
 
   validatePoll (pollData) {

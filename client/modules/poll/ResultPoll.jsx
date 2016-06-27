@@ -1,5 +1,4 @@
 import React from 'react'
-import $ from 'jquery'
 import { Link } from 'react-router'
 import Pusher from 'pusher-js'
 import { Pie } from 'react-chartjs'
@@ -29,16 +28,16 @@ const ResultPoll = React.createClass({
 
   _fetchPoll () {
     const { pollId } = this.props.params
-    return $.get(`/api/poll/${pollId}`, (result) => {
-      const { question, pollOptions } = result
-      this.setState({
-        question,
-        pollOptions,
-        loading: false
-      })
-    }).fail(() => {
-      this.setState({error: true})
-    })
+	return axios
+		.get(`/api/poll/${pollId}`)
+		.then(({data: res}) => {
+			this.setState({
+				question: res.question,
+				pollOptions: res.pollOptions,
+				loading: false
+			});
+		})
+		.catch(err => this.setState({error: true}));
   },
 
   componentWillUnmount () {

@@ -4,6 +4,12 @@ const pollController = { }
 
 pollController.handlePost = function (req, res, next) {
   db.sequelize.transaction(async transaction => {
+	if (req.body.question.length <= 8) {
+		res.status(400).json({
+			message: 'Your question must be at least 8 characters long'
+		})
+	}
+
     if (req.body.options.length < 2) {
       res.status(400).json({
         message: 'You need to specify at least two poll options'

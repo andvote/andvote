@@ -1,5 +1,5 @@
 import React from 'react'
-import $ from 'jquery'
+import axios from 'axios'
 import { browserHistory, Link } from 'react-router'
 
 const VotePoll = React.createClass({
@@ -23,16 +23,16 @@ const VotePoll = React.createClass({
 
   _fetchPoll () {
     const { pollId } = this.props.params
-    return $.get(`/api/poll/${pollId}`, (result) => {
-      const { question, pollOptions } = result
-      this.setState({
-        question,
-        pollOptions,
-        loading: false
-      })
-    }).fail(() => {
-      this.setState({error: true})
-    })
+	return axios
+		.get(`/api/poll/${pollId}`)
+		.then(({data: res}) => {
+			this.setState({
+				question: res.question,
+				pollOptions: res.pollOptions,
+				loading: false
+			});
+		})
+		.catch(err => this.setState({error: true}));
   },
 
   render () {
@@ -92,23 +92,20 @@ const VotePoll = React.createClass({
       return alert('Please select an option.')
     }
 
-    $.ajax({
-      method: 'POST',
-      url: '/api/vote/',
-      data: JSON.stringify(data),
-      dataType: 'json',
-      contentType: 'application/json'
-    }).always((result) => {
-      if (result.status === 400) {
-        return alert(JSON.parse(result.responseText).message)
-      } else {
-        if (screen.width <= 800) {
-          window.location = `/r/${pollId}`
-        } else {
-          browserHistory.push(`/r/${pollId}`)
-        }
-      }
-    })
+	axios
+		.post('/api/poll', data)
+		.then(({data: res, status}) => {
+			if (status === 400) {
+				return alert(res.responseText.message);
+			} else {
+				if (screen.width <= 800) {
+					window.location = `/r/${pollId}`;
+				} else {
+					browserHistory.push(`/r/${pollId}`)
+				}
+			}
+		})
+		.catch(err => console.log(err))
   },
 
   checkedOption (event) {
